@@ -18,6 +18,7 @@ class User {
     public birthDay: string;
 
     constructor ({firstName, lastName, email, password, phoneNumber, address, city, state, birthDay, id} : ICreateUserDTO) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -27,7 +28,6 @@ class User {
         this.city = city;
         this.state = state;
         this.birthDay = birthDay;
-        this.id = id;
 
         if(!this.id){
             this.id = uuidv4();
