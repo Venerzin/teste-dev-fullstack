@@ -12,8 +12,14 @@ class UsersRepository implements IUsersRepository {
     }
 
     create({ firstName, lastName, email, password, phoneNumber, address, city, state, birthDay }: ICreateUserDTO): User {
-        const user = new User({ firstName, lastName, email, password, phoneNumber, address, city, state, birthDay});
+        const userAlreadyExists = this.users.some((user) => user.email === email);
 
+        if(userAlreadyExists){
+            throw new Error("Email has already been registered");
+        }
+        
+        const user = Object.assign(new User(), { firstName, lastName, email, password, phoneNumber, address, city, state, birthDay});
+        
         this.users.push(user);
 
         return user;
@@ -27,15 +33,18 @@ class UsersRepository implements IUsersRepository {
         
         return this.users;
     }
-    update(id: string, data: ICreateUserDTO) {
-        
-        const user = this.findById(id);
+    update(data: ICreateUserDTO) {
 
-        if(!user){
-            return
+        if(data.id){
+
+            const user = this.findById(data!.id);
+
+            if(!user){
+                throw new Error("User not found!!!");
+            }
+
+            Object.assign(user, data);
         }
-
-        Object.assign(user, data);
 
         return;
     }

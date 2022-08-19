@@ -6,7 +6,7 @@ export interface IUsersRepository{
     create(data : ICreateUserDTO) : User;
     findById(id: string): User | undefined;
     list(): User[];
-    update(id: string, data : ICreateUserDTO): void;
+    update(data : ICreateUserDTO): void;
     delete(id: string): void
 
 }
