@@ -1,4 +1,5 @@
 import {v4 as uuidv4} from "uuid";
+import { ICreateUserDTO } from "../modules/users/dtos/ICreateUserDTO";
 class User {
     
     public id?: string;
@@ -16,7 +17,7 @@ class User {
 
     public birthDay: string;
 
-    constructor (firstName: string, lastName: string, email: string, password: string, phoneNumber: string, address: string, city: string, state: string, birthDay: string, id?: string) {
+    constructor ({firstName, lastName, email, password, phoneNumber, address, city, state, birthDay, id} : ICreateUserDTO) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -33,3 +34,5 @@ class User {
         }
     }
 }
+
+export { User };
